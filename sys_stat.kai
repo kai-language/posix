@@ -1,0 +1,47 @@
+
+Stat :: struct {
+    device_id:     i32, // ID of device containing file
+    mode:          u16, // Mode of the file
+    nlink:         u16, // Number of hard links
+    serial:        u64, // File serial number
+    uid:           u32, // User ID of the file's owner
+    gid:           u32, // Group ID of the file's group
+    rdev:          i32, // Device ID, if device
+
+    last_access:   u64, // Time of last access
+    modified:      u64, // Time of last modification
+    status_change: u64, // Time of last status change
+    created:       u64, // Time of creation
+
+    size:          i64,  // Size of the file, in bytes
+    blocks:        i64,  // Number of blocks allocated for the file
+    block_size:    i32,  // Optimal blocksize for I/O
+    flags:         u32,  // User-defined flags for the file
+    gen_num:       u32,  // File generation number ...?
+    _spare:        i32,  // RESERVED
+    _reserve1,
+    _reserve2:     i64  // RESERVED
+}
+
+TimeSpec :: struct {
+    sec: i64,
+    nsec: i64
+}
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+    chmod :: (path: *u8, mode: u16) -> i32
+    fchmod :: (fd: i32, mode: u16) -> i32
+    fchmodat :: (fd: i32, path: *u8, mode: u16, flag: i32) -> i32
+    fstat :: (fd: i32, buf: *Stat) -> i32
+    fstatat :: (fd: i32, path: *u8, buf: *Stat, flag: i32) -> i32
+    futimens :: (fd: i32, times: [2]TimeSpec) -> i32
+    lstat :: (path: *u8, buf: *Stat) -> i32
+    mkdir :: (path: *u8, mode: u16) -> i32
+    mkdirat :: (fd: i32, path: *u8, mode: u16) -> i32
+    mkfifo :: (path: *u8, mode: u16) -> i32
+    stat :: (path: *u8, buf: *Stat) -> i32
+    umask :: (cmask: u16) -> u16
+    utimensat :: (fd: i32, path: *u8, times: [2]TimeSpec, flag: i32) -> i32
+}
