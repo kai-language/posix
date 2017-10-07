@@ -1,0 +1,29 @@
+
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+    memchr   :: (s: rawptr, c: i32, len: u64) -> rawptr
+    memcmp   :: (s1: rawptr, s2: rawptr, len: u64) -> i32
+    memcpy   :: (dst: rawptr, src: rawptr, len: u64) -> rawptr
+    memmove  :: (dst: rawptr, src: rawptr, len: u64) -> rawptr
+    memset   :: (buf: rawptr, c: i32, len: u64) -> rawptr
+    strcat   :: (s1: *u8, s2: *u8) -> *u8
+    strchr   :: (s: *u8, c: i32) -> *u8
+    strcmp   :: (s1: *u8, s2: *u8) -> i32
+    strcoll  :: (s1: *u8, s2: *u8) -> i32
+    strcpy   :: (dst: *u8, src: *u8) -> *u8
+    strcspn  :: (s: *u8, charset: *u8) -> u64
+    strerror :: (errno: i32) -> *u8
+    strlen   :: (s: *u8) -> u64
+    strncat  :: (a: *u8, b: *u8, len: u64) -> *u8
+    strncmp  :: (s1: *u8, s2: *u8, n: u64) -> i32
+    strncpy  :: (dst: *u8, src: *u8, n: u64) -> *u8
+    strpbrk  :: (s: *u8, charset: *u8) -> *u8
+    strrchr  :: (s: *u8, c: i32) -> *u8
+    strspn   :: (s: *u8, charset: *u8) -> u64
+    strstr   :: (big: *u8, little: *u8) -> *u8
+    strtok   :: (str: *u8, sep: *u8) -> *u8
+    strxfrm  :: (s1: *u8, s2: *u8, n: u64) -> u64
+    strdup   :: (s: *u8) -> *u8
+}

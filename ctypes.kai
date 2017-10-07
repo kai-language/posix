@@ -1,0 +1,21 @@
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+    isalnum  :: (i32) -> i32
+    isalpha  :: (i32) -> i32
+    isblank  :: (i32) -> i32
+    iscntrl  :: (i32) -> i32
+    isdigit  :: (i32) -> i32
+    isgraph  :: (i32) -> i32
+    islower  :: (i32) -> i32
+    isprint  :: (i32) -> i32
+    ispunct  :: (i32) -> i32
+    isspace  :: (i32) -> i32
+    isupper  :: (i32) -> i32
+    isxdigit :: (i32) -> i32
+    tolower  :: (i32) -> i32
+    toupper  :: (i32) -> i32
+    isascii  :: (i32) -> i32
+    toascii  :: (i32) -> i32
+}

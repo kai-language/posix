@@ -1,0 +1,67 @@
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+
+    signal : (i32, (i32) -> void) -> i32
+
+    raise :: (i32) -> i32
+
+    //void	(* _Nullable bsd_signal(i32, void (* _Nullable)(i32)))(i32)
+    kill            :: (pid: i32, sig: i32) -> i32
+    killpg          :: (pgrp: i32, sig: i32) -> i32
+    //pthread_kill    :: (pthread_t, i32) -> i32
+    //pthread_sigmask :: (i32, const sigset_t *, sigset_t *) -> i32
+    //sigaction       :: (int, const struct sigaction * __restrict, struct sigaction * __restrict) -> i32
+    //sigaddset       :: (sigset_t *, int) -> i32
+    //sigaltstack     :: (const stack_t * __restrict, stack_t * __restrict) -> i32
+    //sigdelset       :: (sigset_t *, int) -> i32
+    //sigemptyset     :: (sigset_t *) -> i32
+    //sigfillset      :: (sigset_t *) -> i32
+    siginterrupt    :: (sig: i32, flag: i32) -> i32
+    //sigismember     :: (const sigset_t *, i32) -> i32
+    sigpause        :: (i32) -> i32
+    //sigpending      :: (sigset_t *) -> i32
+    //sigprocmask     :: (i32, const sigset_t * __restrict, sigset_t * __restrict) -> i32
+    //sigsuspend      :: (const sigset_t *) -> i32
+    //sigwait         :: (const sigset_t * __restrict, i32 * __restrict) -> i32
+
+    /* Darwin */
+    //void psignal(unsigned i32, const char *)
+    //i32	sigblock(i32)
+    //i32	sigsetmask(i32)
+    //i32	sigvec(i32, struct sigvec *, struct sigvec *)
+}
+
+SIGHUP    :: 1          /* hangup */
+SIGINT    :: 2          /* interrupt */
+SIGQUIT   :: 3          /* quit */
+SIGILL    :: 4          /* illegal instruction (not reset when caught) */
+SIGTRAP   :: 5          /* trace trap (not reset when caught) */
+SIGABRT   :: 6          /* abort() */
+//SIGIOT    :: SIGABRT    /* compatibility */
+SIGEMT    :: 7          /* EMT instruction */
+SIGFPE    :: 8          /* floating point exception */
+SIGKILL   :: 9          /* kill (cannot be caught or ignored) */
+SIGBUS    :: 10         /* bus error */
+SIGSEGV   :: 11         /* segmentation violation */
+SIGSYS    :: 12         /* bad argument to system call */
+SIGPIPE   :: 13         /* write on a pipe with no one to read it */
+SIGALRM   :: 14         /* alarm clock */
+SIGTERM   :: 15         /* software termination signal from kill */
+SIGURG    :: 16         /* urgent condition on IO channel */
+SIGSTOP   :: 17         /* sendable stop signal not from tty */
+SIGTSTP   :: 18         /* stop signal from tty */
+SIGCONT   :: 19         /* continue a stopped process */
+SIGCHLD   :: 20         /* to parent on child stop or exit */
+SIGTTIN   :: 21         /* to readers pgrp upon background tty read */
+SIGTTOU   :: 22         /* like TTIN for output if (tp->t_local&LTOSTOP) */
+SIGIO     :: 23         /* input/output possible signal */
+SIGXCPU   :: 24         /* exceeded CPU time limit */
+SIGXFSZ   :: 25         /* exceeded file size limit */
+SIGVTALRM :: 26         /* virtual time alarm */
+SIGPROF   :: 27         /* profiling time alarm */
+SIGWINCH  :: 28         /* window size changes */
+SIGINFO   :: 29         /* information request */
+SIGUSR1   :: 30         /* user defined signal 1 */
+SIGUSR2   :: 31         /* user defined signal 2 */

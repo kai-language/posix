@@ -1,0 +1,109 @@
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+    _exit :: (i32) -> void
+    access :: (*u8, i32) -> i32
+    alarm :: (u32) -> u32
+    chdir :: (*u8) -> i32
+    chown :: (*u8, u32, u32) -> i32
+    close :: (i32) -> i32
+
+    dup    :: (fd: i32) -> i32
+    dup2   :: (fd: i32, fd2: i32) -> i32
+    execl   :: (path: *u8, arg0: *u8, args: #cvargs ..*u8) -> i32
+    execle  :: (path: *u8, arg0: *u8, args: #cvargs ..*u8) -> i32
+    execlp  :: (file: *u8, arg0: *u8, args: #cvargs ..*u8) -> i32
+    execv   :: (path: *u8, argv: **u8) -> i32
+    execve  :: (file: *u8, argv: **u8, envp: **u8) -> i32
+    execvp  :: (file: *u8, argv: **u8) -> i32
+    fork   :: () -> i32
+    fpathconf :: (fd: i32, name: i32) -> i64
+    getcwd  :: (buffer: *u8, size: u64) -> *u8
+    getegid  :: () -> u32
+    geteuid  :: () -> u32
+    getgid  :: () -> u32
+    getgroups :: (gidsetsize: i32, grouplist: *u32) -> i32
+    getlogin :: () -> *u8
+    getpgrp  :: () -> i32
+    getpid  :: () -> i32
+    getppid  :: () -> i32
+    getuid  :: () -> u32
+    isatty  :: (fd: i32) -> i32
+    link   :: (path1: *u8, path2: *u8) -> i32
+    lseek   :: (fd: i32, offset: i64, whence: i32) -> i64
+    pathconf :: (path: *u8, name: i32) -> i64
+
+    pause :: () -> i32
+
+    pipe :: ([2]i32) -> i32
+
+    rmdir  :: (path: *u8) -> i32
+    setgid :: (u32) -> i32
+    setpgid :: (pid: i32, pgid: i32) -> i32
+    setsid :: () -> i32
+    setuid :: (u32) -> i32
+
+    sleep :: (u32) -> u32
+
+    sysconf  :: (i32) -> i64
+    tcgetpgrp :: (i32) -> i32
+    tcsetpgrp :: (i32, i32) -> i32
+    ttyname  :: (fd: i32) -> *u8
+    ttyname_r :: (fd: i32, buf: *u8, size: u64) -> *u8
+
+    unlink :: (*u8) -> i32
+
+    read :: (fd: i32, buf: rawptr, nbytes: u64) -> i64
+    write :: (fd: i32, buf: rawptr, nbytes: u64) -> i64
+
+    confstr :: (name: i32, buf: *u8, size: u64) -> u64
+
+    getopt :: (argc: i32, argv: **u8, optstring: *u8) -> i32
+    optarg : *u8
+    optind : i32
+    opterr : i32
+    optopt : i32
+
+    crypt :: (key: *u8, salt: *u8) -> *u8
+    encrypt :: (block: *u8, edflag: i32) -> i32
+
+    fchdir :: (i32) -> i32
+    gethostid :: () -> i64
+    getpgid :: (i32) -> i32
+    getsid :: (i32) -> i32
+
+    lchown :: (path: *u8, owner: u32, group: u32) -> i32
+
+    lockf :: (fd: i32, function: i32, size: i64) -> i32
+
+    nice :: (i32) -> i32
+
+    pread :: (fd: i32, buf: rawptr, size: u64, offset: u64) -> i64
+    pwrite :: (fd: i32, buf: rawptr, size: u64, offset: u64) -> i64
+
+    setpgrp :: (pid: i32, pgid: i32) -> i32
+
+    setregid :: (u32, u32) -> i32
+
+    setreuid :: (u32, u32) -> i32
+
+    swab :: (src: rawptr, dst: rawptr, nbytes: i64) -> void
+    sync :: () -> void
+    truncate :: (*u8, i64) -> i32
+    ualarm :: (us: u32, interval: u32) -> u32
+    usleep :: (us: u32) -> i32
+    vfork :: () -> i32
+
+    fsync :: (fd: i32) -> i32
+
+    ftruncate :: (fd: i32, length: i64) -> i32
+    getlogin_r :: (buf: *u8, size: u64) -> i32
+
+    fchown :: (fd: i32, owner: u32, group: u32) -> i32
+    gethostname :: (name: *u8, size: u64) -> i32
+    readlink :: (path: *u8, buf: *u8, size: u64) -> i64
+    setegid :: (u32) -> i32
+    seteuid :: (u32) -> i32
+    symlink :: (*u8, *u8) -> i32
+}

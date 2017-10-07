@@ -1,0 +1,174 @@
+
+#library "libc"
+
+#foreign libc #callconv "c" {
+    acosf :: (f32) -> f32
+    acos :: (f64) -> f64
+
+    asinf :: (f32) -> f32
+    asin :: (f64) -> f64
+
+    atanf :: (f32) -> f32
+    atan :: (f64) -> f64
+
+    atan2f :: (f32, f32) -> f32
+    atan2 :: (f64, f64) -> f64
+
+    cosf :: (f32) -> f32
+    cos :: (f64) -> f64
+
+    sinf :: (f32) -> f32
+    sin :: (f64) -> f64
+
+    tanf :: (f32) -> f32
+    tan :: (f64) -> f64
+
+    acoshf :: (f32) -> f32
+    acosh :: (f64) -> f64
+
+    asinhf :: (f32) -> f32
+    asinh :: (f64) -> f64
+
+    atanhf :: (f32) -> f32
+    atanh :: (f64) -> f64
+
+    coshf :: (f32) -> f32
+    cosh :: (f64) -> f64
+
+    sinhf :: (f32) -> f32
+    sinh :: (f64) -> f64
+
+    tanhf :: (f32) -> f32
+    tanh :: (f64) -> f64
+
+    expf :: (f32) -> f32
+    exp :: (f64) -> f64
+
+    exp2f :: (f32) -> f32
+    exp2 :: (f64) -> f64
+
+    expm1f :: (f32) -> f32
+    expm1 :: (f64) -> f64
+
+    logf :: (f32) -> f32
+    log :: (f64) -> f64
+
+    log10f :: (f32) -> f32
+    log10 :: (f64) -> f64
+
+    log2f :: (f32) -> f32
+    log2 :: (f64) -> f64
+
+    log1pf :: (f32) -> f32
+    log1p :: (f64) -> f64
+
+    logbf :: (f32) -> f32
+    logb :: (f64) -> f64
+
+    modff :: (f32, *f32) -> f32
+    modf :: (f64, *f64) -> f64
+
+    ldexpf :: (f32, i32) -> f32
+    ldexp :: (f64, i32) -> f64
+
+    frexpf :: (f32, *i32) -> f32
+    frexp :: (f64, *i32) -> f64
+
+    ilogbf :: (f32) -> i32
+    ilogb :: (f64) -> i32
+
+    scalbnf :: (f32, i32) -> f32
+    scalbn :: (f64, i32) -> f64
+
+    scalblnf :: (f32, i64) -> f32
+    scalbln :: (f64, i64) -> f64
+
+    fabsf :: (f32) -> f32
+    fabs :: (f64) -> f64
+
+    cbrtf :: (f32) -> f32
+    cbrt :: (f64) -> f64
+
+    hypotf :: (f32, f32) -> f32
+    hypot :: (f64, f64) -> f64
+
+    powf :: (f32, f32) -> f32
+    pow :: (f64, f64) -> f64
+
+    sqrtf :: (f32) -> f32
+    sqrt :: (f64) -> f64
+
+    erff :: (f32) -> f32
+    erf :: (f64) -> f64
+
+    erfcf :: (f32) -> f32
+    erfc :: (f64) -> f64
+
+    lgammaf :: (f32) -> f32
+    lgamma :: (f64) -> f64
+
+    tgammaf :: (f32) -> f32
+    tgamma :: (f64) -> f64
+
+    ceilf :: (f32) -> f32
+    ceil :: (f64) -> f64
+
+    floorf :: (f32) -> f32
+    floor :: (f64) -> f64
+
+    nearbyintf :: (f32) -> f32
+    nearbyint :: (f64) -> f64
+
+    rintf :: (f32) -> f32
+    rint :: (f64) -> f64
+
+    lrintf :: (f32) -> i64
+    lrint :: (f64) -> i64
+
+    roundf :: (f32) -> f32
+    round :: (f64) -> f64
+
+    lroundf :: (f32) -> i64
+    lround :: (f64) -> i64
+
+    truncf :: (f32) -> f32
+    trunc :: (f64) -> f64
+
+    fmodf :: (f32, f32) -> f32
+    fmod :: (f64, f64) -> f64
+
+    remainderf :: (f32, f32) -> f32
+    remainder :: (f64, f64) -> f64
+
+    remquof :: (f32, f32, *i32) -> f32
+    remquo :: (f64, f64, *i32) -> f64
+
+    copysignf :: (f32, f32) -> f32
+    copysign :: (f64, f64) -> f64
+
+    nanf :: (*u8) -> f32
+    nan :: (*u8) -> f64
+
+    nextafterf :: (f32, f32) -> f32
+    nextafter :: (f64, f64) -> f64
+
+    fdimf :: (f32, f32) -> f32
+    fdim :: (f64, f64) -> f64
+
+    fmaxf :: (f32, f32) -> f32
+    fmax :: (f64, f64) -> f64
+
+    fminf :: (f32, f32) -> f32
+    fmin :: (f64, f64) -> f64
+
+    fmaf :: (f32, f32, f32) -> f32
+    fma :: (f64, f64, f64) -> f64
+
+    j0    :: (f64) -> f64
+    j1    :: (f64) -> f64
+    jn    :: (i32, f64) -> f64
+    y0    :: (f64) -> f64
+    y1    :: (f64) -> f64
+    yn    :: (i32, f64) -> f64
+    scalb :: (f64, f64) -> f64
+}

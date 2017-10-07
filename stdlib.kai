@@ -1,0 +1,109 @@
+
+#library "libc"
+
+
+div_t :: struct {
+    quot, rem: i32
+}
+
+ldiv_t :: struct {
+    quot, rem: i64
+}
+
+#foreign libc #callconv "c" {
+    abort :: () -> void
+    abs :: (i32) -> i32
+    atexit :: (rawptr) -> i32
+    atof :: (*u8) -> f64
+    atoi :: (*u8) -> i32
+    atol :: (*u8) -> i64
+    atoll :: (*u8) -> i64
+    div :: (i32, i32) -> div_t
+    exit :: (i32) -> void
+    labs :: (i64) -> i64
+    ldiv :: (i64, i64) -> ldiv_t
+    llabs :: (i64) -> i64
+    lldiv :: (i64, i64) -> ldiv_t
+    mblen  :: (s: *u8, n: u64) -> i32
+    //mbstowcs :: (wchar_t * __restrict , *u8 __restrict, size_t) -> u64
+    //int mbtowc(wchar_t * __restrict, *u8 __restrict, size_t)
+    posix_memalign :: (memptr: *rawptr, alignment: u64, size: u64) -> i32
+    //bsearch :: (const void *__key, const void *__base, size_t __nel, size_t __width, int (* _Nonnull __compar)(const void *, const void *)) -> rawptr
+    //qsort :: (void *__base, size_t __nel, size_t __width, int (* _Nonnull __compar)(const void *, const void *)) -> void
+    strtof :: (str: *u8, end: **u8) -> f32
+    strtod :: (str: *u8, end: **u8) -> f64
+    strtol :: (str: *u8, end: **u8, base: i32) -> i64
+    strtoll :: (str: *u8, end: **u8, base: i32) -> i64
+    strtoul :: (str: *u8, end: **u8, base: i32) -> u64
+    strtoull :: (str: *u8, end: **u8, base: i32) -> u64
+    strtoq :: (str: *u8, end: **u8, base: i32) -> i64
+    strtouq :: (str: *u8, end: **u8, base: i32) -> u64
+    //long double strtold(*u8, char **)
+
+    calloc :: (count: u64, size: u64) -> rawptr
+    free :: (rawptr) -> void
+    malloc :: (size: u64) -> rawptr
+    realloc :: (ptr: rawptr, size: u64) -> rawptr
+    reallocf :: (p: rawptr, size: u64) -> rawptr
+    valloc :: (size: u64) -> rawptr
+
+    system :: (command: *u8) -> i32
+
+    _Exit :: (i32) -> void
+    a64l :: (*u8) -> i64
+    l64a :: (i64) -> *u8
+
+
+    rand     :: () -> i32
+    rand_r   :: (*u32) -> i32
+    srand    :: (u32) -> void
+    sranddev :: () -> void
+
+    initstate  :: (u64, *u8, i64) -> *u8
+    random     :: () -> i64
+    setstate   :: (*u8) -> *u8
+    srandom    :: (u64) -> void
+    srandomdev :: () -> void
+
+    drand48   :: () -> f64
+    erand48   :: ([3]u16) -> f64
+    jrand48   :: ([3]u16) -> f64
+    lcong48   :: ([7]u16) -> void
+    lrand48   :: () -> i64
+    mrand48   :: () -> i64
+    nrand48   :: ([3]u16) -> i64
+    srand48   :: (i64) -> void
+    seed48    :: ([3]u16) -> *u16
+
+    suboptarg :: *u8
+    getsubopt :: (optionp: **u8, keylistp: **u8, valuep: **u8) -> i32
+
+
+    mktemp   :: (*u8) -> *u8
+    mkstemp  :: (*u8) -> i32
+
+    realpath :: (filename: *u8, resolvedName: *u8) -> *u8
+
+    setkey   :: (*u8) -> i32
+
+    getenv   :: (*u8) -> *u8
+    setenv   :: (name: *u8, value: *u8, overwrite: i32) -> i32
+    putenv   :: (*u8) -> i32
+    unsetenv :: (*u8) -> void
+
+
+    grantpt      :: (i32) -> i32
+    ptsname      :: (i32) -> *u8
+    unlockpt     :: (i32) -> i32
+    posix_openpt :: (i32) -> i32
+
+    devname   :: (device: i32, typ: u16) -> *u8
+    devname_r :: (device: i32, typ: u16, buf: *u8, len: i32) -> *u8
+
+    getbsize :: (headerlenp: *i32, blocksizep: *i64) -> *u8
+
+    getloadavg :: (loadavg: *f64, n: i32) -> i32
+
+    getprogname :: () -> *u8
+    setprogname :: (*u8) -> void
+}

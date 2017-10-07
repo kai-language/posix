@@ -1,0 +1,14 @@
+
+#library "libc"
+
+RTLD_LAZY   :: 0x1
+RTLD_NOW    :: 0x2
+RTLD_LOCAL  :: 0x4
+RTLD_GLOBAL :: 0x8
+
+#foreign libc #callconv "c" {
+    dlclose :: (handle: rawptr) -> i32
+    dlerror :: () -> *u8
+    dlopen  :: (path: *u8, mode: i32) -> rawptr
+    dlsym   :: (handle: rawptr, symbol: *u8) -> rawptr
+}
