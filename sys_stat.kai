@@ -1,30 +1,30 @@
 
 Stat :: struct {
-    device_id:     i32, // ID of device containing file
-    mode:          u16, // Mode of the file
-    nlink:         u16, // Number of hard links
-    serial:        u64, // File serial number
-    uid:           u32, // User ID of the file's owner
-    gid:           u32, // Group ID of the file's group
-    rdev:          i32, // Device ID, if device
+    device_id:     i32  // ID of device containing file
+    mode:          u16  // Mode of the file
+    nlink:         u16  // Number of hard links
+    serial:        u64  // File serial number
+    uid:           u32  // User ID of the file's owner
+    gid:           u32  // Group ID of the file's group
+    rdev:          i32  // Device ID, if device
 
-    last_access:   u64, // Time of last access
-    modified:      u64, // Time of last modification
-    status_change: u64, // Time of last status change
-    created:       u64, // Time of creation
+    last_access:   u64  // Time of last access
+    modified:      u64  // Time of last modification
+    status_change: u64  // Time of last status change
+    created:       u64  // Time of creation
 
-    size:          i64,  // Size of the file, in bytes
-    blocks:        i64,  // Number of blocks allocated for the file
-    block_size:    i32,  // Optimal blocksize for I/O
-    flags:         u32,  // User-defined flags for the file
-    gen_num:       u32,  // File generation number ...?
-    _spare:        i32,  // RESERVED
+    size:          i64  // Size of the file, in bytes
+    blocks:        i64  // Number of blocks allocated for the file
+    block_size:    i32  // Optimal blocksize for I/O
+    flags:         u32  // User-defined flags for the file
+    gen_num:       u32  // File generation number ...?
+    _spare:        i32  // RESERVED
     _reserve1,
     _reserve2:     i64  // RESERVED
 }
 
 TimeSpec :: struct {
-    sec: i64,
+    sec:  i64
     nsec: i64
 }
 
@@ -45,3 +45,57 @@ TimeSpec :: struct {
     umask :: (cmask: u16) -> u16
     utimensat :: (fd: i32, path: *u8, times: [2]TimeSpec, flag: i32) -> i32
 }
+
+// File type
+S_IFMT   :: 0170000 // Type of file mask
+S_IFIFO  :: 0010000 // Named pipe (fifo)
+S_IFCHR  :: 0020000 // Character special
+S_IFDIR  :: 0040000 // Directory
+S_IFBLK  :: 0060000 // Block special
+S_IFREG  :: 0100000 // Regular
+S_IFLNK  :: 0120000 // Symbolic link
+S_IFSOCK :: 0140000 // Socket
+
+// File mode
+// Read, write, execute/search by owner
+S_IRWXU :: 0000700 // RWX mask for owner
+S_IRUSR :: 0000400 // R for owner
+S_IWUSR :: 0000200 // W for owner
+S_IXUSR :: 0000100 // X for owner
+
+// Read, write, execute/search by group
+S_IRWXG :: 0000070 // RWX mask for group
+S_IRGRP :: 0000040 // R for group
+S_IWGRP :: 0000020 // W for group
+S_IXGRP :: 0000010 // X for group
+
+// Read, write, execute/search by others
+S_IRWXO :: 0000007 // RWX mask for other
+S_IROTH :: 0000004 // R for other
+S_IWOTH :: 0000002 // W for other
+S_IXOTH :: 0000001 // X for other
+
+S_ISUID :: 0004000 // Set user id on execution
+S_ISGID :: 0002000 // Set group id on execution
+S_ISVTX :: 0001000 // Directory restrcted delete
+
+// symbolic link
+S_ISLNK  :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFLNK }
+
+// regular file
+S_ISREG  :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFREG }
+
+// directory
+S_ISDIR  :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFDIR }
+
+// char special
+S_ISCHR  :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFCHR }
+
+// block special
+S_ISBLK  :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFBLK }
+
+// fifo or socket
+S_ISFIFO :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFIFO }
+
+// socket
+S_ISSOCK :: fn(m: u32) -> bool { return (m & S_IFMT) == S_IFSOCK }

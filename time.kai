@@ -1,53 +1,52 @@
 
 #library "libc"
 
-tm :: struct {
-    tm_sec: i32,      /* seconds after the minute [0-60] */
-    tm_min: i32,      /* minutes after the hour [0-59] */
-    tm_hour: i32,     /* hours since midnight [0-23] */
-    tm_mday: i32,     /* day of the month [1-31] */
-    tm_mon: i32,      /* months since January [0-11] */
-    tm_year: i32,     /* years since 1900 */
-    tm_wday: i32,     /* days since Sunday [0-6] */
-    tm_yday: i32,     /* days since January 1 [0-365] */
-    tm_isdst: i32,    /* Daylight Savings Time flag */
-    tm_gmtoff: i64,   /* offset from UTC in seconds */
-    tm_zone: *u8      /* timezone abbreviation */
+Tm :: struct {
+    sec:    i32 /* seconds after the minute [0-60] */
+    min:    i32 /* minutes after the hour [0-59] */
+    hour:   i32 /* hours since midnight [0-23] */
+    mday:   i32 /* day of the month [1-31] */
+    mon:    i32 /* months since January [0-11] */
+    year:   i32 /* years since 1900 */
+    wday:   i32 /* days since Sunday [0-6] */
+    yday:   i32 /* days since January 1 [0-365] */
+    isdst:  i32 /* Daylight Savings Time flag */
+    gmtoff: i64 /* offset from UTC in seconds */
+    zone:   *u8 /* timezone abbreviation */
 }
 
-
-timespec :: struct {
-    tv_sec: i64,
-    tv_nsec: i64
+Timespec :: struct {
+    sec:  i64
+    nsec: i64
 }
 
 #foreign libc #callconv "c" {
-    asctime   :: (time: *tm) -> *u8
+    asctime   :: (time: *Tm) -> *u8
     clock     :: () -> u64
     ctime     :: (clock: *i64) -> *u8
     difftime  :: (time1: i64, time0: i64) -> f64
-    getdate   :: (s: *u8) -> *tm
-    gmtime    :: (clock: *i64) -> *tm
-    localtime :: (clock: *i64) -> *tm
-    mktime    :: (time: *tm) -> i64
-    strftime  :: (s: *u8, size: u64, format: *u8, time: *tm) -> u64
-    strptime  :: (*u8, *u8, *tm) -> *u8
+    getdate   :: (s: *u8) -> *Tm
+    gmtime    :: (clock: *i64) -> *Tm
+    localtime :: (clock: *i64) -> *Tm
+    mktime    :: (time: *Tm) -> i64
+    strftime  :: (s: *u8, size: u64, format: *u8, time: *Tm) -> u64
+    strptime  :: (*u8, *u8, *Tm) -> *u8
     time      :: (*i64) -> i64
 
     tzset :: () -> void
 
     /* [TSF] Thread safe functions */
-    asctime_r   :: (*tm, *u8) -> *u8
+    asctime_r   :: (*Tm, *u8) -> *u8
     ctime_r     :: (*i64, *u8) -> *u8
-    gmtime_r    :: (*i64, *tm) -> *tm
-    localtime_r :: (*i64, *tm) -> *tm
+    gmtime_r    :: (*i64, *Tm) -> *Tm
+    localtime_r :: (*i64, *Tm) -> *Tm
 
     posix2time :: (i64) -> i64
     timezone   :: (i32, i32) -> *u8
     tzsetwall  :: () -> void
     time2posix :: (i64) -> i64
-    timelocal  :: (*tm) -> i64
-    timegm     :: (*tm) -> i64
+    timelocal  :: (*Tm) -> i64
+    timegm     :: (*Tm) -> i64
 
-    nanosleep :: (rqtp: *timespec, rmtp: *timespec) -> i32
+    nanosleep :: (rqtp: *Timespec, rmtp: *Timespec) -> i32
 }

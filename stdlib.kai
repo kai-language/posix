@@ -2,11 +2,11 @@
 #library "libc"
 
 
-div_t :: struct {
+Div :: struct {
     quot, rem: i32
 }
 
-ldiv_t :: struct {
+LDiv :: struct {
     quot, rem: i64
 }
 
@@ -18,12 +18,12 @@ ldiv_t :: struct {
     atoi :: (*u8) -> i32
     atol :: (*u8) -> i64
     atoll :: (*u8) -> i64
-    div :: (i32, i32) -> div_t
+    div :: (i32, i32) -> Div
     exit :: (i32) -> void
     labs :: (i64) -> i64
-    ldiv :: (i64, i64) -> ldiv_t
+    ldiv :: (i64, i64) -> LDiv
     llabs :: (i64) -> i64
-    lldiv :: (i64, i64) -> ldiv_t
+    lldiv :: (i64, i64) -> LDiv
     mblen  :: (s: *u8, n: u64) -> i32
     //mbstowcs :: (wchar_t * __restrict , *u8 __restrict, size_t) -> u64
     //int mbtowc(wchar_t * __restrict, *u8 __restrict, size_t)

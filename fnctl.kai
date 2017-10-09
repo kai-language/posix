@@ -63,11 +63,11 @@ SEEK_END :: 2 /* set file offset to EOF plus offset */
  * Advisory file segment locking data type -
  * information passed to system by user
  */
-flock :: struct {
-    start: i64, /* starting offset */
-    len: i64, /* len = 0 means until end of file */
-    pid: i32, /* lock owner */
-    type: i16, /* lock type: read/write, etc. */
+Flock :: struct {
+    start:  i64 /* starting offset */
+    len:    i64 /* len = 0 means until end of file */
+    pid:    i32 /* lock owner */
+    type:   i16 /* lock type: read/write, etc. */
     whence: i64 /* type of l_start */
 }
 

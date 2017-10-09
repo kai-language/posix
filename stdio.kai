@@ -4,13 +4,13 @@
 File :: rawptr
 
 #foreign libc #callconv "c" {
-    clearerr :: (File) -> void
-    fclose   :: (File) -> i32
-    feof     :: (File) -> i32
-    ferror   :: (File) -> i32
-    fflush   :: (File) -> i32
-    fgetc    :: (File) -> i32
-    fgetpos  :: (File, *i64) -> i32
+    clearerr :: (stream: File) -> void
+    fclose   :: (stream: File) -> i32
+    feof     :: (stream: File) -> i32
+    ferror   :: (stream: File) -> i32
+    fflush   :: (stream: File) -> i32
+    fgetc    :: (stream: File) -> i32
+    fgetpos  :: (stream: File, pos: *i64) -> i32
     fgets    :: (str: *u8, count: i32, stream: File) -> *u8
     fopen    :: (filename: *u8, mode: *u8) -> File
     fprintf  :: (stream: File, format: *u8, args: #cvargs ..any) -> i32
@@ -21,9 +21,9 @@ File :: rawptr
     fscanf   :: (stream: File, format: *u8, args: #cvargs ..any) -> i32
     fseek    :: (stream: File, offset: i64, origin: i32) -> i32
     fsetpos  :: (stream: File, pos: *i64) -> i32
-    ftell    :: (File) -> i64
+    ftell    :: (stream: File) -> i64
     fwrite   :: (buffer: rawptr, size: u64, count: u64, stream: File) -> u64
-    getc     :: (File) -> i32
+    getc     :: (stream: File) -> i32
     getchar  :: () -> i32
     gets     :: (*u8) -> *u8
     perror   :: (*u8) -> void
@@ -31,9 +31,9 @@ File :: rawptr
     putc     :: (ch: i32, stream: File) -> i32
     putchar  :: (ch: i32) -> i32
     puts     :: (*u8) -> i32
-    remove   :: (*u8) -> i32
+    remove   :: (path: *u8) -> i32
     rename   :: (old: *u8, new: *u8) -> i32
-    rewind   :: (File) -> void
+    rewind   :: (stream: File) -> void
     scanf    :: (format: *u8, args: #cvargs ..any) -> i32
     setbuf   :: (stream: File, buffer: *u8) -> void
     setvbuf  :: (stream: File, buffer: *u8, mode: i32, size: u64) -> i32
@@ -43,27 +43,27 @@ File :: rawptr
     tmpnam   :: (filename: *u8) -> *u8
     ungetc   :: (ch: i32, stream: File) -> i32
 
-    ctermid :: (*u8) -> *u8
+    ctermid :: (buf: *u8) -> *u8
 
-    fdopen   :: (i32, *u8) -> File
-    fileno   :: (File) -> i32
+    fdopen   :: (fd: i32, mode: *u8) -> File
+    fileno   :: (stream: File) -> i32
 
-    pclose   :: (File) -> i32
-    popen    :: (*u8, *u8) -> File
+    pclose   :: (stream: File) -> i32
+    popen    :: (cmd: *u8, mode: *u8) -> File
 
-    flockfile        :: (File) -> void
-    ftrylockfile     :: (File) -> i32
-    funlockfile      :: (File) -> void
-    getc_unlocked    :: (File) -> i32
+    flockfile        :: (file: File) -> void
+    ftrylockfile     :: (file: File) -> i32
+    funlockfile      :: (file: File) -> void
+    getc_unlocked    :: (file: File) -> i32
     getchar_unlocked :: () -> i32
-    putc_unlocked    :: (i32, File) -> i32
-    putchar_unlocked :: (i32) -> i32
+    putc_unlocked    :: (char: i32, stream: File) -> i32
+    putchar_unlocked :: (char: i32) -> i32
 
-    getw :: (File) -> i32
-    putw :: (i32, File) -> i32
+    getw :: (stream: File) -> i32
+    putw :: (char: i32, stream: File) -> i32
 
     fseeko :: (stream: File, offset: i64, whence: i32) -> i32
-    ftello :: (File) -> i64
+    ftello :: (stream: File) -> i64
 
     snprintf :: (str: *u8, size: u64, format: *u8, args: #cvargs ..any) -> i32
 
@@ -77,4 +77,3 @@ File :: rawptr
 SEEK_SET :: 0   /* set file offset to offset */
 SEEK_CUR :: 1   /* set file offset to current plus offset */
 SEEK_END :: 2   /* set file offset to EOF plus offset */
-
