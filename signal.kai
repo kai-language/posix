@@ -1,35 +1,46 @@
 
 #library "libc"
 
+
+// dummy, it's the right size so it will work
+Sigset_t :: struct {
+    val: [16]u64
+}
+
+SigAction :: struct {
+    action: rawptr
+    mask: Sigset_t
+    flags: i32
+}
+
 #foreign libc #callconv "c" {
 
     signal : (i32, (i32) -> void) -> i32
-
     raise :: (i32) -> i32
 
     //void	(* _Nullable bsd_signal(i32, void (* _Nullable)(i32)))(i32)
     kill            :: (pid: i32, sig: i32) -> i32
     killpg          :: (pgrp: i32, sig: i32) -> i32
     //pthread_kill    :: (pthread_t, i32) -> i32
-    //pthread_sigmask :: (i32, const sigset_t *, sigset_t *) -> i32
-    //sigaction       :: (int, const struct sigaction * __restrict, struct sigaction * __restrict) -> i32
-    //sigaddset       :: (sigset_t *, int) -> i32
+    //pthread_sigmask :: (i32, const Sigset_t *, Sigset_t *) -> i32
+    sigaction       :: (i32, *SigAction, *SigAction) -> i32
+    sigaddset       :: (*Sigset_t, i32) -> i32
     //sigaltstack     :: (const stack_t * __restrict, stack_t * __restrict) -> i32
-    //sigdelset       :: (sigset_t *, int) -> i32
-    //sigemptyset     :: (sigset_t *) -> i32
-    //sigfillset      :: (sigset_t *) -> i32
+    //sigdelset       :: (Sigset_t *, int) -> i32
+    sigemptyset     :: (*Sigset_t) -> i32
+    sigfillset      :: (*Sigset_t) -> i32
     siginterrupt    :: (sig: i32, flag: i32) -> i32
-    //sigismember     :: (const sigset_t *, i32) -> i32
+    //sigismember     :: (const Sigset_t *, i32) -> i32
     sigpause        :: (i32) -> i32
-    //sigpending      :: (sigset_t *) -> i32
-    //sigprocmask     :: (i32, const sigset_t * __restrict, sigset_t * __restrict) -> i32
-    //sigsuspend      :: (const sigset_t *) -> i32
-    //sigwait         :: (const sigset_t * __restrict, i32 * __restrict) -> i32
+    //sigpending      :: (Sigset_t *) -> i32
+    //sigprocmask     :: (i32, const Sigset_t * __restrict, Sigset_t * __restrict) -> i32
+    //sigsuspend      :: (const Sigset_t *) -> i32
+    //sigwait         :: (const Sigset_t * __restrict, i32 * __restrict) -> i32
 
     /* Darwin */
     //void psignal(unsigned i32, const char *)
     //i32	sigblock(i32)
-    //i32	sigsetmask(i32)
+    sigsetmask :: (i32) -> i32
     //i32	sigvec(i32, struct sigvec *, struct sigvec *)
 }
 

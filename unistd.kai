@@ -1,6 +1,16 @@
 
 #library "libc"
 
+_WSTOPPED :: 0o177
+_WSTATUS :: fn(x: i32) -> i32 { return x & _WSTOPPED }
+
+WEXITSTATUS  :: fn(x: i32) -> i32 { return x >> 8 }
+WSTOPSIG     :: fn(x: i32) -> i32 { return x >> 8 }
+WIFCONTINUED :: fn(x: i32) -> i32 { return (_WSTATUS(x) == _WSTOPPED && WSTOPSIG(x) == 0x13) ? 1 : 0 }
+WIFSTOPPED   :: fn(x: i32) -> i32 { return (_WSTATUS(x) == _WSTOPPED && WSTOPSIG(x) != 0x13) ? 1 : 0 }
+WIFEXITED    :: fn(x: i32) -> i32 { return (_WSTATUS(x) == 0) ? 1 : 0}
+WIFSIGNALED  :: fn(x: i32) -> i32 { return (_WSTATUS(x) != _WSTOPPED && _WSTATUS(x) != 0) ? 1 : 0 }
+
 #foreign libc #callconv "c" {
     _exit :: (i32) -> void
     access :: (*u8, i32) -> i32
@@ -33,6 +43,9 @@
     link   :: (path1: *u8, path2: *u8) -> i32
     lseek   :: (fd: i32, offset: i64, whence: i32) -> i64
     pathconf :: (path: *u8, name: i32) -> i64
+
+    wait :: (statLoc: *i32) -> i32
+    waitpid :: (pid: i32, statLoc: *i32, options: i32) -> i32
 
     pause :: () -> i32
 
