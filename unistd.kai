@@ -1,6 +1,11 @@
 
 #library "libc"
 
+R_OK :: 4
+W_OK :: 2
+X_OK :: 1
+F_OK :: 0
+
 _WSTOPPED :: 0o177
 _WSTATUS :: fn(x: i32) -> i32 { return x & _WSTOPPED }
 
